@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h4 class="centered">Арарарарт</h4>
+    {%for i in jobs%}
+        <h2>Action # {{loop.index}}</h2>
+        <table>
+            <tr>
+                <td>Title of activity</td>
+                <td>Team leader</td>
+                <td>Duration</td>
+                <td>List of collaborators</td>
+                <td>Is finished</td>
+            </tr>
+            <tr>
+                <td class="data">{{i.job}}</td>
+                <td class="data">{{i.teamleader.name}}</td>
+                <td class="data">{{i.work_size}} hours</td>
+                <td class="data">{{i.collaborators}}</td>
+                <td class="isfinished">
+                    {%if i.is_finished%}Is finished{%else%}Is not finished{%endif%}
+                </td>
+            </tr>
+        </table>
+    {%endfor%}
+{% endblock %}
