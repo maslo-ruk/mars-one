@@ -98,6 +98,26 @@ def register():
         return redirect('/')
     return render_template('register.html', title='Регистрация', form=form, **param)
 
+
+@app.route('/add_job')
+def add_job():
+    from data.ajob_form import JobForm
+    form = JobForm()
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        job = Job(
+            job=form.title.data,
+            team_leader=form.lead_id.data,
+            work_size=form.work_size.data,
+            collaborators=form.collaborators.data,
+            is_finished=form.is_finished.data
+        )
+        session.add(job)
+        session.commit()
+        return redirect('/')
+    return render_template('job_form.html', title='Adding a Job', form=form, **param)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
