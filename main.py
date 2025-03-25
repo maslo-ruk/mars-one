@@ -85,13 +85,18 @@ def register():
                                    message="Такой пользователь уже есть")
         user = User(
             name=form.name.data,
-            email=form.email.data
+            surname=form.surname.data,
+            email=form.email.data,
+            age = form.age.data,
+            position=form.position.data,
+            speciality=form.spec.data,
+            address=form.address.data
         )
         user.set_password(form.password.data)
         session.add(user)
         session.commit()
         return redirect('/')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Регистрация', form=form, **param)
 
 @login_manager.user_loader
 def load_user(user_id):
